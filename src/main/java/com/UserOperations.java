@@ -1,6 +1,7 @@
 package com;
 
 import com.model.Tokens;
+import com.model.User;
 import com.model.UserRegisterResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -12,6 +13,7 @@ import static io.restassured.RestAssured.given;
 public class UserOperations {
 
     public static final String EMAIL_POSTFIX = "@yandex.ru";
+
 
     /*
      метод регистрации нового пользователя

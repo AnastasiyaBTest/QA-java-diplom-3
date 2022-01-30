@@ -1,3 +1,5 @@
+package GoogleChomeTests;
+
 import com.PageObject.AuthorizathionPage;
 import com.PageObject.HomePageStellaburgers;
 import com.PageObject.RegistrationPage;

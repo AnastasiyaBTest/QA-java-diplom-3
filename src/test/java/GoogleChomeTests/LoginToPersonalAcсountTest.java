@@ -1,3 +1,5 @@
+package GoogleChomeTests;
+
 import com.PageObject.*;
 import com.UserOperations;
 import com.codeborne.selenide.Configuration;

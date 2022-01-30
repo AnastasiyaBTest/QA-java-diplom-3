@@ -1,3 +1,5 @@
+package GoogleChomeTests;
+
 import com.PageObject.HomePageStellaburgers;
 import com.codeborne.selenide.Configuration;
 import org.junit.Assert;
