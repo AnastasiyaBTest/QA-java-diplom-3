@@ -1,8 +1,7 @@
-package YandexBrowserTests;
+package googleChomeYandexBrowserTests;
 
-import com.PageObject.AuthorizathionPage;
-import com.PageObject.HomePageStellaburgers;
-import com.codeborne.selenide.Configuration;
+import com.pageObject.AuthorizathionPage;
+import com.pageObject.HomePageStellaburgers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,10 +12,16 @@ import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class TransferToConstructorAndClickLogoTest {
+
+    private final String SITE_URL = "https://stellarburgers.nomoreparties.site/";
+
     @Before
     public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver.exe");
-        Configuration.browser = "chrome";
+        if (System.getProperty("browser").equals("yandex")){
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver.exe");
+        } else if(System.getProperty("browser").equals("chrome")){
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+        }
     }
 
     @Test
@@ -25,7 +30,7 @@ public class TransferToConstructorAndClickLogoTest {
 
         final String EXPECTED_URL = "https://stellarburgers.nomoreparties.site/";
 
-        HomePageStellaburgers homePageStellaburger = open("https://stellarburgers.nomoreparties.site/",
+        HomePageStellaburgers homePageStellaburger = open(SITE_URL,
                 HomePageStellaburgers.class);
         homePageStellaburger.clickLinkToThePersonalAccount();
 
@@ -44,7 +49,7 @@ public class TransferToConstructorAndClickLogoTest {
 
         final String EXPECTED_URL = "https://stellarburgers.nomoreparties.site/";
 
-        HomePageStellaburgers homePageStellaburger = open("https://stellarburgers.nomoreparties.site/",
+        HomePageStellaburgers homePageStellaburger = open(SITE_URL,
                 HomePageStellaburgers.class);
         homePageStellaburger.clickLinkToThePersonalAccount();
 

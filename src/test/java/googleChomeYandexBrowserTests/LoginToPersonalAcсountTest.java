@@ -1,8 +1,8 @@
-package GoogleChomeTests;
+package googleChomeYandexBrowserTests;
 
-import com.PageObject.*;
-import com.UserOperations;
 import com.codeborne.selenide.Configuration;
+import com.pageObject.*;
+import com.UserOperations;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,13 +15,19 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class LoginToPersonalAcсountTest {
 
-private UserOperations userOperations;
-private Map<String, String> userData;
+
+    private final String SITE_URL = "https://stellarburgers.nomoreparties.site/";
+
+    private UserOperations userOperations;
+    private Map<String, String> userData;
 
     @Before
     public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-       Configuration.browser = "chrome";
+        if (System.getProperty("browser").equals("yandex")){
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver.exe");
+        } else if(System.getProperty("browser").equals("chrome")){
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+        }
        userOperations = new UserOperations();
         userData = userOperations.register();
     }
@@ -31,7 +37,7 @@ private Map<String, String> userData;
     @DisplayName("Вход в ЛК через кнопку войти в аккаунт на главной")
     public void successfulLoginToPersonalAccountOnTheButtonSignIn() {
 
-        HomePageStellaburgers homePageStellaburger = open("https://stellarburgers.nomoreparties.site/",
+        HomePageStellaburgers homePageStellaburger = open(SITE_URL,
                 HomePageStellaburgers.class);
 
         homePageStellaburger.clickLoginButton();
@@ -54,7 +60,7 @@ private Map<String, String> userData;
     @DisplayName("Вход в ЛК по ссылке Личный кабинет")
     public void successfulLoginToPersonalAccountThroughButtonPersonalAccount() {
 
-        HomePageStellaburgers homePageStellaburger = open("https://stellarburgers.nomoreparties.site/",
+        HomePageStellaburgers homePageStellaburger = open(SITE_URL,
                 HomePageStellaburgers.class);
 
         homePageStellaburger.clickLinkToThePersonalAccount();
@@ -77,7 +83,7 @@ private Map<String, String> userData;
     @DisplayName("Вход в ЛК через кнопку войти на странице регистрации")
     public void successfulLoginToPersonalAccountThroughButtonSignInOnRegisterPage() {
 
-        HomePageStellaburgers homePageStellaburger = open("https://stellarburgers.nomoreparties.site/",
+        HomePageStellaburgers homePageStellaburger = open(SITE_URL,
                 HomePageStellaburgers.class);
 
         homePageStellaburger.clickLinkToThePersonalAccount();
@@ -106,7 +112,7 @@ private Map<String, String> userData;
     @DisplayName("Вход через с формы восстановления пароля")
     public void successfulLoginToPersonalAccountThroughLinkToTheRecoverPassword() {
 
-        HomePageStellaburgers homePageStellaburger = open("https://stellarburgers.nomoreparties.site/",
+        HomePageStellaburgers homePageStellaburger = open(SITE_URL,
                 HomePageStellaburgers.class);
 
         homePageStellaburger.clickLinkToThePersonalAccount();

@@ -1,9 +1,8 @@
-package YandexBrowserTests;
+package googleChomeYandexBrowserTests;
 
-import com.PageObject.AuthorizathionPage;
-import com.PageObject.HomePageStellaburgers;
-import com.PageObject.RegistrationPage;
-import com.codeborne.selenide.Configuration;
+import com.pageObject.AuthorizathionPage;
+import com.pageObject.HomePageStellaburgers;
+import com.pageObject.RegistrationPage;
 import com.model.User;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
@@ -15,12 +14,17 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 
 public class RegistrationTest {
+
+    private final String SITE_URL = "https://stellarburgers.nomoreparties.site/";
     private User user;
 
     @Before
     public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver.exe");
-        Configuration.browser = "chrome";
+        if (System.getProperty("browser").equals("yandex")){
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver.exe");
+        } else if(System.getProperty("browser").equals("chrome")){
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+        }
         user = User.getRandom();
     }
 
@@ -28,7 +32,7 @@ public class RegistrationTest {
     @DisplayName("Успешная регистрация и авторизация")
     public void successfulRegistrationWithValidDataAndLogin() {
 
-        HomePageStellaburgers homePageStellaburger = open("https://stellarburgers.nomoreparties.site/",
+        HomePageStellaburgers homePageStellaburger = open(SITE_URL,
                 HomePageStellaburgers.class);
         homePageStellaburger.clickLinkToThePersonalAccount();
 
@@ -54,7 +58,7 @@ public class RegistrationTest {
     @DisplayName("Ошибочная регистрация при указании пароля меньше 6 символов")
     public void unsuccessfulRegistrationWithInvalidPassword() {
 
-        HomePageStellaburgers homePageStellaburger = open("https://stellarburgers.nomoreparties.site/",
+        HomePageStellaburgers homePageStellaburger = open(SITE_URL,
                 HomePageStellaburgers.class);
         homePageStellaburger.clickLinkToThePersonalAccount();
 

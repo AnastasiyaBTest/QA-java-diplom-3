@@ -1,10 +1,10 @@
-package GoogleChomeTests;
+package googleChomeYandexBrowserTests;
 
-import com.PageObject.AccountProfilePage;
-import com.PageObject.AuthorizathionPage;
-import com.PageObject.HomePageStellaburgers;
-import com.UserOperations;
 import com.codeborne.selenide.Configuration;
+import com.pageObject.AccountProfilePage;
+import com.pageObject.AuthorizathionPage;
+import com.pageObject.HomePageStellaburgers;
+import com.UserOperations;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,18 +14,21 @@ import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
-import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class LogoutOfPersonalAccountTest {
+
+    private final String SITE_URL = "https://stellarburgers.nomoreparties.site/";
 
     private UserOperations userOperations;
     private Map<String, String> userData;
 
     @Before
     public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-        Configuration.browser = "chrome";
-
+        if (System.getProperty("browser").equals("yandex")){
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver.exe");
+        } else if(System.getProperty("browser").equals("chrome")){
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+        }
         userOperations = new UserOperations();
         userData = userOperations.register();
     }
@@ -34,7 +37,7 @@ public class LogoutOfPersonalAccountTest {
     @DisplayName("Выход из учетки")
     public void successfulLogoutOfPersonalAccount() {
 
-        HomePageStellaburgers homePageStellaburger = open("https://stellarburgers.nomoreparties.site/",
+        HomePageStellaburgers homePageStellaburger = open(SITE_URL,
                 HomePageStellaburgers.class);
         homePageStellaburger.clickLoginButton();
 

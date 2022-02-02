@@ -1,20 +1,25 @@
-package GoogleChomeTests;
+package googleChomeYandexBrowserTests;
 
-import com.PageObject.HomePageStellaburgers;
 import com.codeborne.selenide.Configuration;
+import com.pageObject.HomePageStellaburgers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class ConstructorTest {
 
+    private final String SITE_URL = "https://stellarburgers.nomoreparties.site/";
+
     @Before
     public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+        if (System.getProperty("browser").equals("yandex")){
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver.exe");
+        } else if(System.getProperty("browser").equals("chrome")){
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+        }
         Configuration.browser = "chrome";
     }
 
@@ -22,7 +27,7 @@ public class ConstructorTest {
     @DisplayName("Успешный выбор булочки")
     public void successfulClickOnBun() {
 
-        HomePageStellaburgers homePageStellaburger = open("https://stellarburgers.nomoreparties.site/",
+        HomePageStellaburgers homePageStellaburger = open(SITE_URL,
                 HomePageStellaburgers.class);
 
         homePageStellaburger.clickFirstTabBunSection();
@@ -36,7 +41,7 @@ public class ConstructorTest {
     @DisplayName("Успешный выбор соуса")
     public void successfulClickOnSauce() {
 
-        HomePageStellaburgers homePageStellaburger = open("https://stellarburgers.nomoreparties.site/",
+        HomePageStellaburgers homePageStellaburger = open(SITE_URL,
                 HomePageStellaburgers.class);
 
         homePageStellaburger.clickSauceButton();
@@ -52,7 +57,7 @@ public class ConstructorTest {
     @DisplayName("Успешный выбор ингредиента")
     public void successfulClickOnIngredients() {
 
-        HomePageStellaburgers homePageStellaburger = open("https://stellarburgers.nomoreparties.site/",
+        HomePageStellaburgers homePageStellaburger = open(SITE_URL,
                 HomePageStellaburgers.class);
 
         homePageStellaburger.clickIngredientsButton();
